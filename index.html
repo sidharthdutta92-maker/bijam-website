@@ -101,6 +101,22 @@ body::before{content:'';position:fixed;inset:0;z-index:9998;pointer-events:none;
 .logo-icon svg{width:17px;height:17px;fill:none;stroke:var(--gold);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
 .logo-name{font-family:'Outfit',sans-serif;font-size:18px;font-weight:700;color:#FFFFFF;letter-spacing:0.12em;text-transform:uppercase}
 .logo-badge{font-size:9px;font-weight:700;color:var(--gold);background:rgba(221,167,74,0.1);padding:3px 9px;border-radius:var(--radius-full);letter-spacing:0.06em;text-transform:uppercase;border:1px solid rgba(221,167,74,0.15)}
+.logo-tagline{font-size:7.5px;font-weight:500;color:var(--muted);letter-spacing:0.22em;text-transform:uppercase;position:absolute;bottom:-8px;left:48px;white-space:nowrap}
+/* ===== TOP NAV LINKS ===== */
+.topbar-nav{display:flex;align-items:center;gap:4px;position:relative;z-index:1}
+.topbar-nav a{font-size:12px;font-weight:500;color:var(--muted);padding:6px 14px;border-radius:var(--radius-full);text-decoration:none;transition:all var(--transition-base);white-space:nowrap;border:1.5px solid transparent}
+.topbar-nav a:hover{background:rgba(255,255,255,0.04);color:var(--text-secondary)}
+.topbar-nav a.active{border-color:rgba(90,159,212,0.3);background:rgba(90,159,212,0.08);color:var(--blue);font-weight:700}
+/* Products dropdown */
+.nav-dropdown{position:relative}
+.nav-dropdown-trigger{font-size:12px;font-weight:500;color:var(--muted);padding:6px 14px;border-radius:var(--radius-full);border:1.5px solid transparent;background:transparent;cursor:pointer;transition:all var(--transition-base);font-family:'Space Grotesk',sans-serif;display:flex;align-items:center;gap:5px}
+.nav-dropdown-trigger:hover{background:rgba(255,255,255,0.04);color:var(--text-secondary)}
+.nav-dropdown-trigger svg{width:10px;height:10px;stroke:currentColor;fill:none;stroke-width:2;transition:transform var(--transition-fast)}
+.nav-dropdown.open .nav-dropdown-trigger svg{transform:rotate(180deg)}
+.nav-dropdown-menu{position:absolute;top:calc(100% + 6px);left:0;min-width:160px;background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-md);box-shadow:var(--shadow-lg);padding:4px;opacity:0;visibility:hidden;transform:translateY(-4px);transition:all var(--transition-fast);z-index:1001}
+.nav-dropdown.open .nav-dropdown-menu{opacity:1;visibility:visible;transform:translateY(0)}
+.nav-dropdown-menu a{display:block;padding:8px 14px;font-size:12px;font-weight:500;color:var(--text-secondary);text-decoration:none;border-radius:var(--radius-sm);transition:all var(--transition-fast)}
+.nav-dropdown-menu a:hover{background:rgba(255,255,255,0.06);color:var(--text-primary)}
 .topbar-stats{font-size:12px;color:rgba(255,255,255,0.35);font-weight:500;position:relative;z-index:1}
 .topbar-stats span{color:rgba(255,255,255,0.7);font-weight:700}
 
@@ -121,6 +137,87 @@ body::before{content:'';position:fixed;inset:0;z-index:9998;pointer-events:none;
 .city-btn.state-btn.active::after{background:var(--gold)}
 .city-sep{width:1px;height:20px;background:var(--border);margin:0 6px;flex-shrink:0}
 .bar-label{font-size:9px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;padding:0 8px;flex-shrink:0}
+/* States dropdown in selector bar */
+.states-dropdown{position:relative;display:inline-flex}
+.states-dropdown-trigger{padding:6px 14px;border-radius:var(--radius-full);border:1.5px solid transparent;background:transparent;color:var(--muted);font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap;font-family:'Space Grotesk',sans-serif;transition:all var(--transition-base);display:flex;align-items:center;gap:5px}
+.states-dropdown-trigger:hover{background:rgba(255,255,255,0.04);color:var(--text-secondary)}
+.states-dropdown-trigger svg{width:10px;height:10px;stroke:currentColor;fill:none;stroke-width:2;transition:transform var(--transition-fast)}
+.states-dropdown.open .states-dropdown-trigger svg{transform:rotate(180deg)}
+.states-dropdown-trigger .count{margin-left:4px;font-size:9px;color:var(--muted-foreground);font-weight:500;background:rgba(255,255,255,0.04);padding:1px 5px;border-radius:var(--radius-full)}
+.states-dropdown-menu{position:fixed;min-width:220px;max-height:360px;overflow-y:auto;background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-md);box-shadow:var(--shadow-xl);padding:4px;opacity:0;visibility:hidden;transform:translateY(-4px);transition:all var(--transition-fast);z-index:10000}
+.states-dropdown.open .states-dropdown-menu{opacity:1;visibility:visible;transform:translateY(0)}
+.states-dropdown-menu button{display:flex;align-items:center;justify-content:space-between;width:100%;padding:8px 14px;font-size:12px;font-weight:500;color:var(--text-secondary);background:transparent;border:none;border-radius:var(--radius-sm);cursor:pointer;transition:all var(--transition-fast);font-family:'Space Grotesk',sans-serif;text-align:left}
+.states-dropdown-menu button:hover{background:rgba(255,255,255,0.06);color:var(--text-primary)}
+.states-dropdown-menu button .count{font-size:10px;color:var(--gold);font-weight:600;background:rgba(221,167,74,0.1);padding:2px 7px;border-radius:var(--radius-full)}
+
+/* ===== PAGE CONTAINER (product & info pages) ===== */
+#page-container{flex:1;background:var(--bg);overflow-y:auto;display:none}
+.pg{max-width:960px;margin:0 auto;padding:48px 32px 64px;animation:fadeInUp 0.4s ease}
+.pg-hero{text-align:center;margin-bottom:48px}
+.pg-badge{display:inline-flex;align-items:center;gap:6px;font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:5px 14px;border-radius:var(--radius-full);margin-bottom:16px}
+.pg-badge-gold{color:var(--gold);background:rgba(221,167,74,0.1);border:1px solid rgba(221,167,74,0.2)}
+.pg-badge-blue{color:var(--blue);background:rgba(90,159,212,0.1);border:1px solid rgba(90,159,212,0.2)}
+.pg-badge-pink{color:var(--pink);background:rgba(230,138,154,0.1);border:1px solid rgba(230,138,154,0.2)}
+.pg-badge-green{color:#6BCB77;background:rgba(107,203,119,0.1);border:1px solid rgba(107,203,119,0.2)}
+.pg-title{font-family:'Outfit',sans-serif;font-size:32px;font-weight:700;color:var(--text-primary);letter-spacing:0.01em;margin-bottom:12px;line-height:1.2}
+.pg-subtitle{font-size:15px;color:var(--text-secondary);line-height:1.7;max-width:640px;margin:0 auto}
+/* Stat strip */
+.pg-stats{display:flex;justify-content:center;gap:12px;margin-top:28px;flex-wrap:wrap}
+.pg-stat{background:var(--card);border:1px solid var(--border);border-radius:var(--radius-md);padding:16px 24px;text-align:center;min-width:120px}
+.pg-stat-val{font-family:'Outfit',sans-serif;font-size:24px;font-weight:700;line-height:1}
+.pg-stat-label{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em;margin-top:4px}
+/* Section */
+.pg-section{margin-bottom:40px}
+.pg-section-title{font-family:'Outfit',sans-serif;font-size:14px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:16px;padding-bottom:8px;border-bottom:1px solid var(--border)}
+/* Cards grid */
+.pg-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px}
+.pg-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius-md);padding:20px;transition:all var(--transition-base)}
+.pg-card:hover{background:var(--card-hover);border-color:rgba(255,255,255,0.1)}
+.pg-card-icon{width:36px;height:36px;border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;margin-bottom:12px;font-size:18px}
+.pg-card h4{font-size:13px;font-weight:700;color:var(--text-primary);margin-bottom:4px}
+.pg-card p{font-size:11px;color:var(--text-secondary);line-height:1.5}
+/* Feature rows */
+.pg-features{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.pg-feature{display:flex;gap:12px;align-items:flex-start;background:var(--card);border:1px solid var(--border);border-radius:var(--radius-md);padding:16px}
+.pg-feature-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;margin-top:4px}
+.pg-feature-text h4{font-size:12px;font-weight:700;color:var(--text-primary);margin-bottom:2px}
+.pg-feature-text p{font-size:11px;color:var(--text-secondary);line-height:1.5}
+/* Pricing table */
+.pg-table{width:100%;border-collapse:collapse;font-size:12px}
+.pg-table thead{background:rgba(255,255,255,0.04)}
+.pg-table th{padding:10px 14px;text-align:left;font-weight:700;color:var(--text-primary);border-bottom:1px solid var(--border);font-size:11px;text-transform:uppercase;letter-spacing:0.04em}
+.pg-table td{padding:10px 14px;border-bottom:1px solid var(--border);color:var(--text-secondary)}
+.pg-table tr:hover td{background:rgba(255,255,255,0.02)}
+.pg-table .price{color:var(--gold);font-weight:700}
+/* CTA */
+.pg-cta{text-align:center;margin-top:40px;padding:32px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius-lg)}
+.pg-cta h3{font-family:'Outfit',sans-serif;font-size:20px;font-weight:700;color:var(--text-primary);margin-bottom:8px}
+.pg-cta p{font-size:13px;color:var(--text-secondary);margin-bottom:20px}
+.pg-cta-btn{display:inline-block;padding:12px 32px;border-radius:var(--radius-full);background:linear-gradient(135deg,var(--gold),#C4923A);color:#0B0F14;font-size:13px;font-weight:700;border:none;cursor:pointer;font-family:'Space Grotesk',sans-serif;transition:all var(--transition-base);text-decoration:none}
+.pg-cta-btn:hover{transform:translateY(-1px);box-shadow:var(--shadow-glow-gold)}
+/* Back link */
+.pg-back{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--muted);margin-bottom:24px;cursor:pointer;border:none;background:none;font-family:'Space Grotesk',sans-serif;transition:color var(--transition-fast)}
+.pg-back:hover{color:var(--text-primary)}
+/* Coming soon placeholder for Careers/About */
+.pg-placeholder{text-align:center;padding:80px 32px}
+.pg-placeholder-icon{font-size:48px;margin-bottom:20px}
+.pg-placeholder-title{font-family:'Outfit',sans-serif;font-size:32px;font-weight:700;color:var(--text-primary);margin-bottom:12px}
+.pg-placeholder-desc{font-size:15px;color:var(--text-secondary);line-height:1.7;max-width:480px;margin:0 auto 28px}
+.pg-placeholder-badge{display:inline-block;font-size:11px;font-weight:700;color:var(--gold);background:rgba(221,167,74,0.1);padding:6px 18px;border-radius:var(--radius-full);letter-spacing:0.1em;text-transform:uppercase;border:1px solid rgba(221,167,74,0.2)}
+/* Showcase image gallery */
+.pg-showcase{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-top:12px}
+.pg-showcase-img{border-radius:var(--radius-md);overflow:hidden;border:1px solid var(--border);background:#000;position:relative}
+.pg-showcase-img img{width:100%;display:block;transition:transform 0.3s ease}
+.pg-showcase-img:hover img{transform:scale(1.03)}
+.pg-showcase-img .pg-img-label{position:absolute;bottom:0;left:0;right:0;padding:8px 12px;background:linear-gradient(transparent,rgba(0,0,0,0.85));font-size:10px;color:rgba(255,255,255,0.85);font-weight:500}
+.pg-hero-img{margin-top:28px;border-radius:var(--radius-lg);overflow:hidden;border:1px solid var(--border);box-shadow:var(--shadow-lg)}
+.pg-hero-img img{width:100%;display:block}
+.pg-phones{display:flex;justify-content:center;gap:16px;margin-top:12px;flex-wrap:wrap}
+.pg-phone{width:150px;border-radius:14px;overflow:hidden;border:1px solid rgba(255,255,255,0.08);box-shadow:var(--shadow-md);background:#000}
+.pg-phone img{width:100%;display:block}
+.pg-tv{border-radius:var(--radius-md);overflow:hidden;border:1px solid var(--border);box-shadow:var(--shadow-lg);margin-top:12px}
+.pg-tv img{width:100%;display:block}
+@media(max-width:640px){.pg-features{grid-template-columns:1fr}.pg-cards{grid-template-columns:1fr}.pg-stats{gap:8px}.pg-stat{min-width:80px;padding:12px 16px}.pg-showcase{grid-template-columns:1fr}.pg-phones{gap:10px}.pg-phone{width:110px}}
 
 /* ===== SEARCH BAR ===== */
 .search-wrap{position:relative;flex-shrink:0;margin-right:8px;z-index:9999}
@@ -420,8 +517,23 @@ body::before{content:'';position:fixed;inset:0;z-index:9998;pointer-events:none;
   <div class="logo">
     <div class="logo-icon"><svg viewBox="0 0 24 24"><path d="M12 2v20M2 12h20M7 7l10 10M17 7L7 17"/></svg></div>
     <span class="logo-name">Bijam</span>
-    <span class="logo-badge">OOH Media</span>
+    <span class="logo-badge">Media Spaces</span>
+    <span class="logo-tagline">Absolute Presence</span>
   </div>
+  <nav class="topbar-nav">
+    <a href="#" class="active" onclick="navigateTo('inventory');return false">Inventory</a>
+    <div class="nav-dropdown" id="nav-products">
+      <button class="nav-dropdown-trigger" onclick="toggleNavDropdown('nav-products')">Products <svg viewBox="0 0 12 12"><polyline points="2,4 6,8 10,4"/></svg></button>
+      <div class="nav-dropdown-menu">
+        <a href="#" onclick="navigateTo('truecaller');document.getElementById('nav-products').classList.remove('open');return false">Truecaller Ads</a>
+        <a href="#" onclick="navigateTo('chalo');document.getElementById('nav-products').classList.remove('open');return false">Chalo Bus Ads</a>
+        <a href="#" onclick="navigateTo('patchwall');document.getElementById('nav-products').classList.remove('open');return false">PatchWall TV Ads</a>
+        <a href="#" onclick="navigateTo('xiaomi');document.getElementById('nav-products').classList.remove('open');return false">Xiaomi Ads</a>
+      </div>
+    </div>
+    <a href="#" onclick="navigateTo('careers');return false">Careers</a>
+    <a href="#" onclick="navigateTo('about-us');return false">About Us</a>
+  </nav>
   <div class="topbar-stats" id="topbar-stats"></div>
 </div>
 
@@ -429,6 +541,9 @@ body::before{content:'';position:fixed;inset:0;z-index:9998;pointer-events:none;
 <div class="city-bar">
   <div class="city-bar-inner" id="city-bar"></div>
 </div>
+
+<!-- PAGE CONTAINER (for non-inventory pages) -->
+<div id="page-container" style="display:none"></div>
 
 <!-- MAIN -->
 <div class="main">
@@ -648,10 +763,12 @@ async function init() {
 
 function buildMediaGrid() {
   // Count media types
-  let tradCount = 0, digiCount = 0, transitCount = 0;
+  let tradCount = 0, digiCount = 0, transitCount = 0, digiScreensTotal = 0;
   allData.forEach(d => {
-    if (d.mediaCategory === 'Digital') digiCount++;
-    else tradCount++;
+    if (d.mediaCategory === 'Digital') {
+      digiCount++;
+      digiScreensTotal += parseInt(d.facesScreens) || 0;
+    } else tradCount++;
     if (d.mediaType && d.mediaType.toLowerCase().includes('railway')) transitCount++;
   });
 
@@ -688,7 +805,7 @@ function buildMediaGrid() {
         </svg>
       </div>
       <h4>Digital LED</h4>
-      <p>${digiCount} screens</p>
+      <p>${digiScreensTotal.toLocaleString()} screens</p>
     </div>
     <div class="media-card" id="media-card-transit" onclick="selectMediaType('transit')">
       <div class="media-card-icon" style="background:rgba(230,138,154,0.1)">
@@ -817,11 +934,15 @@ function buildStateBar() {
   </div>`;
   html += `<button class="city-btn state-btn active" onclick="backToAllIndia()" id="btn-all">All India</button>`;
   html += `<div class="city-sep"></div>`;
-  html += `<span class="bar-label">States</span>`;
+  // States collapsed into dropdown
+  let stateMenuItems = '';
   states.forEach(([state, data]) => {
-    const safeId = state.replace(/[^a-zA-Z0-9]/g, '_');
-    html += `<button class="city-btn state-btn" onclick="selectState('${state.replace(/'/g, "\\'")}')" id="btn-state-${safeId}">${state}<span class="count">${data.entries.length}</span></button>`;
+    stateMenuItems += `<button onclick="selectState('${state.replace(/'/g, "\\'")}');closeStatesDropdown()">${state}<span class="count">${data.entries.length}</span></button>`;
   });
+  html += `<div class="states-dropdown" id="states-dropdown">
+    <button class="states-dropdown-trigger" onclick="toggleStatesDropdown()">States<span class="count">${states.length}</span> <svg viewBox="0 0 12 12"><polyline points="2,4 6,8 10,4"/></svg></button>
+    <div class="states-dropdown-menu">${stateMenuItems}</div>
+  </div>`;
   bar.innerHTML = html;
 }
 
@@ -1188,6 +1309,376 @@ function handleBack() {
   } else if (currentMediaFilter) {
     backToAllIndia();
   }
+}
+
+// ===== STATES DROPDOWN =====
+function toggleStatesDropdown() {
+  const dd = document.getElementById('states-dropdown');
+  dd.classList.toggle('open');
+  if (dd.classList.contains('open')) {
+    const trigger = dd.querySelector('.states-dropdown-trigger');
+    const rect = trigger.getBoundingClientRect();
+    const menu = dd.querySelector('.states-dropdown-menu');
+    menu.style.top = (rect.bottom + 6) + 'px';
+    menu.style.left = rect.left + 'px';
+  }
+}
+function closeStatesDropdown() {
+  const dd = document.getElementById('states-dropdown');
+  if (dd) dd.classList.remove('open');
+}
+
+// ===== NAV DROPDOWN =====
+function toggleNavDropdown(id) {
+  const dd = document.getElementById(id);
+  dd.classList.toggle('open');
+}
+
+// Close dropdowns on outside click
+document.addEventListener('click', function(e) {
+  // States dropdown
+  const sd = document.getElementById('states-dropdown');
+  if (sd && !sd.contains(e.target)) sd.classList.remove('open');
+  // Nav products dropdown
+  const nd = document.getElementById('nav-products');
+  if (nd && !nd.contains(e.target)) nd.classList.remove('open');
+});
+
+// ===== PAGE NAVIGATION =====
+function navigateTo(page) {
+  document.querySelectorAll('.topbar-nav a').forEach(a => a.classList.remove('active'));
+  const clickedLink = event?.target?.closest('a');
+  if (clickedLink) clickedLink.classList.add('active');
+
+  if (page === 'inventory') {
+    document.querySelector('.main').style.display = 'flex';
+    document.querySelector('.city-bar').style.display = 'block';
+    document.getElementById('page-container').style.display = 'none';
+    document.querySelector('.topbar-nav a[onclick*="inventory"]').classList.add('active');
+    backToAllIndia();
+    return;
+  }
+  document.querySelector('.main').style.display = 'none';
+  document.querySelector('.city-bar').style.display = 'none';
+  const container = document.getElementById('page-container');
+  container.style.display = 'block';
+  container.scrollTop = 0;
+
+  const builders = { truecaller: buildTruecallerPage, chalo: buildChaloPage, patchwall: buildPatchwallPage, xiaomi: buildXiaomiPage };
+  if (builders[page]) { container.innerHTML = builders[page](); return; }
+
+  // Careers / About Us placeholder
+  const placeholders = {
+    'careers': { icon: '\u{1F4BC}', title: 'Careers', desc: 'Join the Bijam team and help shape the future of outdoor advertising in India.' },
+    'about-us': { icon: '\u{1F3E2}', title: 'About Us', desc: 'Bijam is a leading media spaces company connecting brands with audiences through strategic outdoor and digital placements across India.' }
+  };
+  const p = placeholders[page] || { icon: '\u{1F4CB}', title: page, desc: '' };
+  container.innerHTML = `<div class="pg-placeholder"><div class="pg-placeholder-icon">${p.icon}</div><h1 class="pg-placeholder-title">${p.title}</h1><p class="pg-placeholder-desc">${p.desc}</p><div class="pg-placeholder-badge">Coming Soon</div></div>`;
+}
+
+// ===== TRUECALLER ADS PAGE =====
+function buildTruecallerPage() {
+  return `<div class="pg">
+    <button class="pg-back" onclick="navigateTo('inventory')"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 2L4 7l5 5"/></svg> Back to Inventory</button>
+    <div class="pg-hero">
+      <span class="pg-badge pg-badge-blue">Digital Advertising</span>
+      <h1 class="pg-title">Truecaller Advertising</h1>
+      <p class="pg-subtitle">Reach 350M+ verified users on India's most trusted caller ID app. Target audiences by city, demographics, and behaviour with high-impact display and video ads.</p>
+      <div class="pg-stats">
+        <div class="pg-stat"><div class="pg-stat-val" style="color:var(--blue)">350M+</div><div class="pg-stat-label">Verified Users</div></div>
+        <div class="pg-stat"><div class="pg-stat-val" style="color:var(--gold)">200M+</div><div class="pg-stat-label">Daily Active</div></div>
+        <div class="pg-stat"><div class="pg-stat-val" style="color:var(--pink)">#1</div><div class="pg-stat-label">Caller ID App</div></div>
+        <div class="pg-stat"><div class="pg-stat-val" style="color:#6BCB77">75%</div><div class="pg-stat-label">Indian Smartphones</div></div>
+      </div>
+      <div class="pg-hero-img"><img src="product-images/truecaller_p1_1.jpg" alt="Truecaller - Take the right call" loading="lazy"></div>
+    </div>
+
+    <div class="pg-section">
+      <div class="pg-section-title">Made for India — 200+ Audience Segments</div>
+      <div class="pg-showcase">
+        <div class="pg-showcase-img"><img src="product-images/truecaller_p5_6.jpg" alt="Truecaller India reach stats" loading="lazy"><div class="pg-img-label">400M+ installs, 160M tier 2/3 cities reach</div></div>
+        <div class="pg-showcase-img"><img src="product-images/truecaller_p8_9.jpg" alt="200+ custom audience segments" loading="lazy"><div class="pg-img-label">200+ custom audience segments</div></div>
+      </div>
+    </div>
+
+    <div class="pg-section">
+      <div class="pg-section-title">Why Truecaller</div>
+      <div class="pg-features">
+        <div class="pg-feature"><div class="pg-feature-dot" style="background:var(--blue)"></div><div class="pg-feature-text"><h4>After Call Screen</h4><p>Full-screen ad exposure after every call — the highest attention moment on mobile.</p></div></div>
+        <div class="pg-feature"><div class="pg-feature-dot" style="background:var(--gold)"></div><div class="pg-feature-text"><h4>Verified Identity Data</h4><p>Reach real, verified users — not bots. Truecaller's identity graph ensures genuine impressions.</p></div></div>
+        <div class="pg-feature"><div class="pg-feature-dot" style="background:var(--pink)"></div><div class="pg-feature-text"><h4>City-Level Targeting</h4><p>Hyper-local campaigns. Target Lucknow, Kanpur, Delhi, or any tier-2/3 city precisely.</p></div></div>
+        <div class="pg-feature"><div class="pg-feature-dot" style="background:#6BCB77"></div><div class="pg-feature-text"><h4>High Engagement</h4><p>Users interact with Truecaller 8-12 times daily. Highest frequency of any utility app.</p></div></div>
+      </div>
+    </div>
+
+    <div class="pg-section">
+      <div class="pg-section-title">Ad Formats</div>
+      <div class="pg-cards">
+        <div class="pg-card"><div class="pg-card-icon" style="background:rgba(90,159,212,0.1)"><svg width="20" height="20" fill="none" stroke="#5A9FD4" stroke-width="1.8"><rect x="3" y="2" width="14" height="16" rx="2"/><rect x="5" y="5" width="10" height="6" rx="1"/><line x1="5" y1="14" x2="15" y2="14"/></svg></div><h4>After Call Screen Display</h4><p>300x250 banner shown after call ends. Maximum visibility at the moment of highest attention.</p></div>
+        <div class="pg-card"><div class="pg-card-icon" style="background:rgba(221,167,74,0.1)"><svg width="20" height="20" fill="none" stroke="#DDA74A" stroke-width="1.8"><rect x="3" y="2" width="14" height="16" rx="2"/><polygon points="8,6 14,10 8,14" fill="rgba(221,167,74,0.2)"/></svg></div><h4>After Call Screen Video</h4><p>300x250 video ad with auto-play. Higher engagement and recall than static display.</p></div>
+        <div class="pg-card"><div class="pg-card-icon" style="background:rgba(230,138,154,0.1)"><svg width="20" height="20" fill="none" stroke="#E68A9A" stroke-width="1.8"><rect x="2" y="3" width="16" height="14" rx="2"/><line x1="2" y1="8" x2="18" y2="8"/><line x1="10" y1="8" x2="10" y2="17"/></svg></div><h4>In-App Display</h4><p>Native display placements within the app interface for sustained brand presence.</p></div>
+        <div class="pg-card"><div class="pg-card-icon" style="background:rgba(107,203,119,0.1)"><svg width="20" height="20" fill="none" stroke="#6BCB77" stroke-width="1.8"><circle cx="10" cy="10" r="7"/><path d="M10 6v4l3 2"/></svg></div><h4>CPM Buy Model</h4><p>Pay per 1 million impressions. Predictable costs with guaranteed delivery volume.</p></div>
+      </div>
+    </div>
+
+    <div class="pg-section">
+      <div class="pg-section-title">Pricing — Lucknow & Kanpur</div>
+      <table class="pg-table">
+        <thead><tr><th>Format</th><th>Specification</th><th>Volume</th><th>City</th><th>Cost</th></tr></thead>
+        <tbody>
+          <tr><td>Display Ad</td><td>300x250 After Call + In-App</td><td>1M impressions</td><td>Lucknow</td><td class="price">\u20B91,60,000</td></tr>
+          <tr><td>Video Ad</td><td>300x250 After Call + In-App</td><td>1M impressions</td><td>Lucknow</td><td class="price">\u20B92,40,000</td></tr>
+          <tr><td>Display Ad</td><td>300x250 After Call + In-App</td><td>1M impressions</td><td>Kanpur</td><td class="price">\u20B91,60,000</td></tr>
+          <tr><td>Video Ad</td><td>300x250 After Call + In-App</td><td>1M impressions</td><td>Kanpur</td><td class="price">\u20B92,40,000</td></tr>
+        </tbody>
+      </table>
+      <p style="font-size:11px;color:var(--muted);margin-top:8px">* Pricing for other cities available on request. Custom geo-targeting and audience segmentation available.</p>
+    </div>
+
+    <div class="pg-section">
+      <div class="pg-section-title">Measurement & Creative Tools</div>
+      <div class="pg-showcase">
+        <div class="pg-showcase-img"><img src="product-images/truecaller_p19_20.jpg" alt="Truecaller measurement suite" loading="lazy"><div class="pg-img-label">Brand Lift, Reach Analysis, Multivariate Testing</div></div>
+        <div class="pg-showcase-img"><img src="product-images/truecaller_p12_13.jpg" alt="Truecaller Play ad formats" loading="lazy"><div class="pg-img-label">Truecaller Play — Rich media ad formats</div></div>
+      </div>
+    </div>
+
+    <div class="pg-cta">
+      <h3>Ready to Advertise on Truecaller?</h3>
+      <p>Get city-level targeting with India's most-used caller ID platform.</p>
+      <a class="pg-cta-btn" href="mailto:sales@bijam.in">Contact Sales</a>
+    </div>
+  </div>`;
+}
+
+// ===== CHALO BUS ADS PAGE =====
+function buildChaloPage() {
+  return `<div class="pg">
+    <button class="pg-back" onclick="navigateTo('inventory')"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 2L4 7l5 5"/></svg> Back to Inventory</button>
+    <div class="pg-hero">
+      <span class="pg-badge pg-badge-green">Transit Advertising</span>
+      <h1 class="pg-title">Chalo Bus Advertising</h1>
+      <p class="pg-subtitle">India's #1 transport technology company. Reach 65M+ monthly sessions across 100+ cities — targeting the daily bus commuter, India's largest captive audience.</p>
+      <div class="pg-stats">
+        <div class="pg-stat"><div class="pg-stat-val" style="color:#6BCB77">100+</div><div class="pg-stat-label">Cities</div></div>
+        <div class="pg-stat"><div class="pg-stat-val" style="color:var(--gold)">65M</div><div class="pg-stat-label">Monthly Sessions</div></div>
+        <div class="pg-stat"><div class="pg-stat-val" style="color:var(--blue)">5.5M</div><div class="pg-stat-label">Unique Users</div></div>
+        <div class="pg-stat"><div class="pg-stat-val" style="color:var(--pink)">15x</div><div class="pg-stat-label">Monthly Usage</div></div>
+      </div>
+    </div>
+
+    <div class="pg-section">
+      <div class="pg-section-title">The Chalo App Experience</div>
+      <div class="pg-showcase">
+        <div class="pg-showcase-img"><img src="product-images/chalo_p9_16.jpg" alt="Chalo live bus tracking with ads" loading="lazy"><div class="pg-img-label">Live tracking page — native ad integration</div></div>
+        <div class="pg-showcase-img"><img src="product-images/chalo_p13_26.jpg" alt="Chalo bus route tracking" loading="lazy"><div class="pg-img-label">Real-time bus route & stop tracking</div></div>
+      </div>
+    </div>
+
+    <div class="pg-section">
+      <div class="pg-section-title">Why Bus Commuters</div>
+      <div class="pg-features">
+        <div class="pg-feature"><div class="pg-feature-dot" style="background:#6BCB77"></div><div class="pg-feature-text"><h4>48% of India Commutes by Bus</h4><p>Buses are 6x larger than taxi networks and the only option for 700M+ people. The most accessible transport mode.</p></div></div>
+        <div class="pg-feature"><div class="pg-feature-dot" style="background:var(--gold)"></div><div class="pg-feature-text"><h4>Value-Conscious India</h4><p>40% of India earns \u20B92-5L p.a. 58% young and working population. Budgeted household finances — high purchase intent.</p></div></div>
+        <div class="pg-feature"><div class="pg-feature-dot" style="background:var(--blue)"></div><div class="pg-feature-text"><h4>84% Young & Working Audience</h4><p>26% aged 15-24, 24% aged 25-34. Digitally active, brand-aware demographic using smartphones daily.</p></div></div>
+        <div class="pg-feature"><div class="pg-feature-dot" style="background:var(--pink)"></div><div class="pg-feature-text"><h4>Proven Impact — 55% Ridership Growth</h4><p>Chalo grew Mumbai BEST ridership by 55% in 12 months. 41% of daily passengers use the Chalo app.</p></div></div>
+      </div>
+    </div>
+
+    <div class="pg-section">
+      <div class="pg-section-title">Ad Formats</div>
+      <div class="pg-cards">
+        <div class="pg-card"><div class="pg-card-icon" style="background:rgba(107,203,119,0.1)"><svg width="20" height="20" fill="none" stroke="#6BCB77" stroke-width="1.8"><rect x="2" y="3" width="16" height="12" rx="2"/><path d="M2 7h16"/></svg></div><h4>Home Screen Masthead</h4><p>1.8M daily impressions. Full-screen experience on app open. Supports image, video, and GIF. CPD buy model.</p></div>
+        <div class="pg-card"><div class="pg-card-icon" style="background:rgba(90,159,212,0.1)"><svg width="20" height="20" fill="none" stroke="#5A9FD4" stroke-width="1.8"><circle cx="10" cy="10" r="7"/><circle cx="10" cy="10" r="2" fill="#5A9FD4"/></svg></div><h4>Live Bus Tracking Page</h4><p>1M+ daily impressions on the highest-engagement screen. Users track buses in real-time. CPM buy.</p></div>
+        <div class="pg-card"><div class="pg-card-icon" style="background:rgba(221,167,74,0.1)"><svg width="20" height="20" fill="none" stroke="#DDA74A" stroke-width="1.8"><path d="M3 4h14l-2 12H5L3 4z"/><line x1="8" y1="8" x2="8" y2="12"/><line x1="12" y1="8" x2="12" y2="12"/></svg></div><h4>Nearby Retail Experience</h4><p>Location-based store discovery. Drives footfall with store addresses, offers & product highlights. Full-screen brand store.</p></div>
+        <div class="pg-card"><div class="pg-card-icon" style="background:rgba(230,138,154,0.1)"><svg width="20" height="20" fill="none" stroke="#E68A9A" stroke-width="1.8"><rect x="3" y="4" width="14" height="10" rx="1.5"/><path d="M3 8h14"/><circle cx="10" cy="17" r="1"/></svg></div><h4>Trip Planner & Ticket Page</h4><p>Non-intrusive awareness messages on trip planner and active ticket screens. Fixed monthly buy.</p></div>
+      </div>
+    </div>
+
+    <div class="pg-section">
+      <div class="pg-section-title">Top City Penetration</div>
+      <table class="pg-table">
+        <thead><tr><th>City</th><th>Daily App Sessions</th><th>Bus Traveller Penetration</th></tr></thead>
+        <tbody>
+          <tr><td>Mumbai</td><td class="price">1,000,000</td><td>70%</td></tr>
+          <tr><td>Chennai</td><td class="price">800,000</td><td>70%</td></tr>
+          <tr><td>Coimbatore</td><td class="price">70,000</td><td>41%</td></tr>
+          <tr><td>Srinagar</td><td class="price">60,000</td><td>35%</td></tr>
+          <tr><td>Nagpur</td><td class="price">45,000</td><td>25%</td></tr>
+          <tr><td>Indore</td><td class="price">40,000</td><td>25%</td></tr>
+          <tr><td>Bhubaneswar</td><td class="price">30,000</td><td>—</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="pg-section">
+      <div class="pg-section-title">Audience Profile</div>
+      <div class="pg-features">
+        <div class="pg-feature"><div class="pg-feature-dot" style="background:var(--blue)"></div><div class="pg-feature-text"><h4>Gender Split</h4><p>74% Male, 26% Female. Young working demographic.</p></div></div>
+        <div class="pg-feature"><div class="pg-feature-dot" style="background:var(--gold)"></div><div class="pg-feature-text"><h4>Device Range</h4><p>72% use \u20B915-25K phones (Vivo, Redmi, Oppo). 24% use \u20B925-45K (Samsung, OnePlus).</p></div></div>
+      </div>
+    </div>
+
+    <div class="pg-section">
+      <div class="pg-section-title">Campaign Case Study — AMFI</div>
+      <div class="pg-showcase">
+        <div class="pg-showcase-img"><img src="product-images/chalo_p16_43.jpg" alt="AMFI campaign creative Mumbai" loading="lazy"><div class="pg-img-label">Mumbai — Marathi creative</div></div>
+        <div class="pg-showcase-img"><img src="product-images/chalo_p16_44.jpg" alt="AMFI campaign creative Nagpur" loading="lazy"><div class="pg-img-label">Nagpur — Hindi/Hinglish (0.45% CTR)</div></div>
+        <div class="pg-showcase-img"><img src="product-images/chalo_p16_45.jpg" alt="AMFI campaign creative Chennai" loading="lazy"><div class="pg-img-label">Chennai — Tamil creative</div></div>
+      </div>
+    </div>
+
+    <div class="pg-cta">
+      <h3>Reach India's Daily Commuters</h3>
+      <p>Advertise on the app that 65 million bus riders use every month.</p>
+      <a class="pg-cta-btn" href="mailto:sales@bijam.in">Contact Sales</a>
+    </div>
+  </div>`;
+}
+
+// ===== PATCHWALL TV ADS PAGE =====
+function buildPatchwallPage() {
+  return `<div class="pg">
+    <button class="pg-back" onclick="navigateTo('inventory')"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 2L4 7l5 5"/></svg> Back to Inventory</button>
+    <div class="pg-hero">
+      <span class="pg-badge pg-badge-pink">Connected TV</span>
+      <h1 class="pg-title">PatchWall TV Advertising</h1>
+      <p class="pg-subtitle">Partner with India's leading Smart TV platform. 12M+ devices, 96% default launcher usage, and premium living room inventory across 30+ OTT partners.</p>
+      <div class="pg-stats">
+        <div class="pg-stat"><div class="pg-stat-val" style="color:var(--pink)">12M+</div><div class="pg-stat-label">Smart TVs Sold</div></div>
+        <div class="pg-stat"><div class="pg-stat-val" style="color:var(--gold)">5.8M</div><div class="pg-stat-label">Monthly Active</div></div>
+        <div class="pg-stat"><div class="pg-stat-val" style="color:var(--blue)">2.6M</div><div class="pg-stat-label">Daily Active</div></div>
+        <div class="pg-stat"><div class="pg-stat-val" style="color:#6BCB77">96%</div><div class="pg-stat-label">Default Usage</div></div>
+      </div>
+      <div class="pg-tv"><img src="product-images/patchwall_p5_15.jpg" alt="PatchWall Home Carousel" loading="lazy"></div>
+    </div>
+
+    <div class="pg-section">
+      <div class="pg-section-title">Platform Highlights</div>
+      <div class="pg-features">
+        <div class="pg-feature"><div class="pg-feature-dot" style="background:var(--pink)"></div><div class="pg-feature-text"><h4>12% Smart TV Market Share</h4><p>35% contribution to Android TV adoption in India. 6+ button remote deals for deeper integration.</p></div></div>
+        <div class="pg-feature"><div class="pg-feature-dot" style="background:var(--gold)"></div><div class="pg-feature-text"><h4>30+ OTT Partners</h4><p>Aggregates content from Netflix, Prime, Hotstar, and 30+ partners. 10+ languages supported.</p></div></div>
+        <div class="pg-feature"><div class="pg-feature-dot" style="background:var(--blue)"></div><div class="pg-feature-text"><h4>11M Impressions/Day (H1)</h4><p>Home Carousel delivers 11M daily impressions in H1, 6.5M in H2. Premium above-the-fold placement.</p></div></div>
+        <div class="pg-feature"><div class="pg-feature-dot" style="background:#6BCB77"></div><div class="pg-feature-text"><h4>21% CTR on App Tray</h4><p>One of the top-performing sections among high-impact placements. Unmatched engagement on CTV.</p></div></div>
+      </div>
+    </div>
+
+    <div class="pg-section">
+      <div class="pg-section-title">Ad Placements</div>
+      <div class="pg-cards">
+        <div class="pg-card"><div class="pg-card-icon" style="background:rgba(230,138,154,0.1)"><svg width="20" height="20" fill="none" stroke="#E68A9A" stroke-width="1.8"><rect x="2" y="3" width="16" height="11" rx="2"/><path d="M6 17h8"/><path d="M10 14v3"/></svg></div><h4>Home Carousel</h4><p>Hero banner on launch. 11M impressions/day. Full-width cinematic creative with auto-rotate.</p></div>
+        <div class="pg-card"><div class="pg-card-icon" style="background:rgba(90,159,212,0.1)"><svg width="20" height="20" fill="none" stroke="#5A9FD4" stroke-width="1.8"><rect x="2" y="4" width="16" height="12" rx="2"/><rect x="4" y="6" width="4" height="4" rx="1"/><rect x="10" y="6" width="6" height="2" rx="0.5"/><rect x="10" y="10" width="4" height="2" rx="0.5"/></svg></div><h4>App Tray</h4><p>Up to 21% CTR. Top-performing section for app discovery and brand awareness.</p></div>
+        <div class="pg-card"><div class="pg-card-icon" style="background:rgba(221,167,74,0.1)"><svg width="20" height="20" fill="none" stroke="#DDA74A" stroke-width="1.8"><rect x="2" y="3" width="16" height="14" rx="2"/><path d="M2 9h16"/><line x1="6" y1="12" x2="14" y2="12"/></svg></div><h4>Recommended For You</h4><p>Personalized rail with 700K-900K impressions and up to 10% CTR. AI-powered recommendations.</p></div>
+        <div class="pg-card"><div class="pg-card-icon" style="background:rgba(107,203,119,0.1)"><svg width="20" height="20" fill="none" stroke="#6BCB77" stroke-width="1.8"><rect x="2" y="2" width="16" height="16" rx="3"/><path d="M6 6h8v8H6z" fill="rgba(107,203,119,0.15)"/><path d="M10 10l3-3"/></svg></div><h4>Ultra Premium Full-Rail</h4><p>Immersive full-rail storytelling. Smart QR integration for instant action. Cinematic visual treatment.</p></div>
+      </div>
+    </div>
+
+    <div class="pg-section">
+      <div class="pg-section-title">Ad Placement Showcase</div>
+      <div class="pg-showcase">
+        <div class="pg-showcase-img"><img src="product-images/patchwall_p1_3.jpg" alt="PatchWall brand ad - Crocs" loading="lazy"><div class="pg-img-label">Home Carousel — Brand Ad</div></div>
+        <div class="pg-showcase-img"><img src="product-images/patchwall_p8_26.jpg" alt="PatchWall ultra premium - Harrier" loading="lazy"><div class="pg-img-label">Ultra Premium — QR Integration</div></div>
+        <div class="pg-showcase-img"><img src="product-images/patchwall_p6_18.jpg" alt="PatchWall recommended for you with ads" loading="lazy"><div class="pg-img-label">Recommended For You — Native Ads</div></div>
+      </div>
+    </div>
+
+    <div class="pg-section">
+      <div class="pg-section-title">Content Consumption Insights</div>
+      <div class="pg-features">
+        <div class="pg-feature"><div class="pg-feature-dot" style="background:var(--pink)"></div><div class="pg-feature-text"><h4>By Category</h4><p>TV Series 43%, Movies 41%, Kids 14%, Live 2%. Family-oriented viewing habits.</p></div></div>
+        <div class="pg-feature"><div class="pg-feature-dot" style="background:var(--gold)"></div><div class="pg-feature-text"><h4>By Language</h4><p>Hindi 51%, English 24%, Malayalam 9%, Tamil 6%, Telugu 5%. Pan-India reach with regional depth.</p></div></div>
+        <div class="pg-feature"><div class="pg-feature-dot" style="background:var(--blue)"></div><div class="pg-feature-text"><h4>By Genre</h4><p>Drama 22%, Kids 20%, Comedy 13%, Action 12%, Reality 10%, Horror 8%. Diverse audience segments.</p></div></div>
+        <div class="pg-feature"><div class="pg-feature-dot" style="background:#6BCB77"></div><div class="pg-feature-text"><h4>Brand + Content Ads</h4><p>Brand Ads drive redirection. Content Ads increase subscriptions. Both formats available for campaign goals.</p></div></div>
+      </div>
+    </div>
+
+    <div class="pg-cta">
+      <h3>Advertise in India's Living Rooms</h3>
+      <p>Premium CTV inventory with 12M+ smart TVs and unmatched engagement.</p>
+      <a class="pg-cta-btn" href="mailto:sales@bijam.in">Contact Sales</a>
+    </div>
+  </div>`;
+}
+
+// ===== XIAOMI ADS PAGE =====
+function buildXiaomiPage() {
+  return `<div class="pg">
+    <button class="pg-back" onclick="navigateTo('inventory')"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 2L4 7l5 5"/></svg> Back to Inventory</button>
+    <div class="pg-hero">
+      <span class="pg-badge pg-badge-gold">Mobile Advertising</span>
+      <h1 class="pg-title">Xiaomi Ads (Mi Ads)</h1>
+      <p class="pg-subtitle">Reach 670M+ monthly active users on the world's 3rd largest smartphone platform. System-level ad placements across MIUI with AI-powered targeting and 140M+ MAU in India alone.</p>
+      <div class="pg-stats">
+        <div class="pg-stat"><div class="pg-stat-val" style="color:var(--gold)">670M+</div><div class="pg-stat-label">Global MAU</div></div>
+        <div class="pg-stat"><div class="pg-stat-val" style="color:var(--blue)">140M+</div><div class="pg-stat-label">India MAU</div></div>
+        <div class="pg-stat"><div class="pg-stat-val" style="color:var(--pink)">#3</div><div class="pg-stat-label">Global Smartphone</div></div>
+        <div class="pg-stat"><div class="pg-stat-val" style="color:#6BCB77">40M+</div><div class="pg-stat-label">New Devices/Year</div></div>
+      </div>
+      <div class="pg-hero-img"><img src="product-images/xiaomi_p20_89.jpg" alt="Xiaomi Mi Ads platform" loading="lazy"></div>
+    </div>
+
+    <div class="pg-section">
+      <div class="pg-section-title">Targeting Capabilities</div>
+      <div class="pg-features">
+        <div class="pg-feature"><div class="pg-feature-dot" style="background:var(--gold)"></div><div class="pg-feature-text"><h4>Appography Targeting</h4><p>Target cohorts of users based on the specific apps they use. Reach BFSI, gaming, shopping audiences precisely.</p></div></div>
+        <div class="pg-feature"><div class="pg-feature-dot" style="background:var(--blue)"></div><div class="pg-feature-text"><h4>Region-Based (State & City)</h4><p>Hyper-local targeting at state and city level across India's 140M+ Xiaomi user base.</p></div></div>
+        <div class="pg-feature"><div class="pg-feature-dot" style="background:var(--pink)"></div><div class="pg-feature-text"><h4>Device-Level Targeting</h4><p>Target by device price range. Reach premium, mid-range, or budget smartphone users.</p></div></div>
+        <div class="pg-feature"><div class="pg-feature-dot" style="background:#6BCB77"></div><div class="pg-feature-text"><h4>AI-Powered Optimization</h4><p>Machine learning auto-optimizes delivery, reduces costs, and generative AI creates localized creatives.</p></div></div>
+      </div>
+    </div>
+
+    <div class="pg-section">
+      <div class="pg-section-title">Ad Formats</div>
+      <div class="pg-cards">
+        <div class="pg-card"><div class="pg-card-icon" style="background:rgba(221,167,74,0.1)"><svg width="20" height="20" fill="none" stroke="#DDA74A" stroke-width="1.8"><path d="M4 4h12v12H4z" rx="2"/><path d="M4 8h12"/><circle cx="10" cy="12" r="1.5"/></svg></div><h4>Push Notifications</h4><p>Text + image cards. CPC/CPM pricing. High response for branding and retargeting campaigns.</p></div>
+        <div class="pg-card"><div class="pg-card-icon" style="background:rgba(90,159,212,0.1)"><svg width="20" height="20" fill="none" stroke="#5A9FD4" stroke-width="1.8"><rect x="3" y="2" width="14" height="16" rx="2"/><rect x="5" y="5" width="10" height="6" rx="1"/><line x1="5" y1="14" x2="15" y2="14"/></svg></div><h4>Native System Ads</h4><p>In Downloads, Security, Cleaner, Music, Themes, Video. CPC/CPA model. Seamless integration.</p></div>
+        <div class="pg-card"><div class="pg-card-icon" style="background:rgba(230,138,154,0.1)"><svg width="20" height="20" fill="none" stroke="#E68A9A" stroke-width="1.8"><rect x="2" y="2" width="16" height="16" rx="3"/><path d="M7 10l3 3 4-5"/></svg></div><h4>Splash Screen Ads</h4><p>Full-screen brand exposure on app launch. Premium placement for maximum brand impact.</p></div>
+        <div class="pg-card"><div class="pg-card-icon" style="background:rgba(107,203,119,0.1)"><svg width="20" height="20" fill="none" stroke="#6BCB77" stroke-width="1.8"><rect x="4" y="4" width="5" height="5" rx="1"/><rect x="11" y="4" width="5" height="5" rx="1"/><rect x="4" y="11" width="5" height="5" rx="1"/><rect x="11" y="11" width="5" height="5" rx="1"/></svg></div><h4>Icon App Recommendations</h4><p>Home screen folders, App Vault, GetApps. High impressions with CPC/CPA pricing across all regions.</p></div>
+        <div class="pg-card"><div class="pg-card-icon" style="background:rgba(255,255,255,0.06)"><svg width="20" height="20" fill="none" stroke="var(--text-secondary)" stroke-width="1.8"><rect x="2" y="4" width="16" height="12" rx="2"/><path d="M6 10h8"/><path d="M6 13h5"/></svg></div><h4>App Vault Cards</h4><p>500K DAU, 1M+ impressions. Custom widgets and deep linking. 3-4.5% CTR.</p></div>
+        <div class="pg-card"><div class="pg-card-icon" style="background:rgba(221,167,74,0.06)"><svg width="20" height="20" fill="none" stroke="#DDA74A" stroke-width="1.8"><circle cx="10" cy="10" r="7"/><path d="M10 6v4"/><circle cx="10" cy="13" r="0.8" fill="#DDA74A"/></svg></div><h4>GetApps Store</h4><p>Xiaomi's global app market with personalized recommendations, carousel, and essentials placements.</p></div>
+      </div>
+    </div>
+
+    <div class="pg-section">
+      <div class="pg-section-title">Ad Formats in Action</div>
+      <div class="pg-showcase">
+        <div class="pg-showcase-img"><img src="product-images/xiaomi_p26_122.jpg" alt="Xiaomi push notifications" loading="lazy"><div class="pg-img-label">Push Notifications — Rich media cards</div></div>
+        <div class="pg-showcase-img"><img src="product-images/xiaomi_p25_113.jpg" alt="Xiaomi splash screen ad" loading="lazy"><div class="pg-img-label">Splash Screen — Full-screen brand impact</div></div>
+        <div class="pg-showcase-img"><img src="product-images/xiaomi_p27_129.jpg" alt="Xiaomi native system ads" loading="lazy"><div class="pg-img-label">Native Ads — Video, Downloads, Cleaner</div></div>
+      </div>
+    </div>
+
+    <div class="pg-section">
+      <div class="pg-section-title">Preload Solutions</div>
+      <div class="pg-features">
+        <div class="pg-feature"><div class="pg-feature-dot" style="background:var(--gold)"></div><div class="pg-feature-text"><h4>Factory Preload</h4><p>Pre-install your app on new Xiaomi devices. Fixed price per user. Growing shipments ensure scale. Second screen, "More Apps" folder, and Games placements.</p></div></div>
+        <div class="pg-feature"><div class="pg-feature-dot" style="background:var(--blue)"></div><div class="pg-feature-text"><h4>Air Preload (PAI)</h4><p>Google Play Auto Install on first boot. Activation within 1 month. Country/model precision. Start with \u20B915K budget.</p></div></div>
+      </div>
+    </div>
+
+    <div class="pg-section">
+      <div class="pg-section-title">Audience Profile</div>
+      <div class="pg-features">
+        <div class="pg-feature"><div class="pg-feature-dot" style="background:var(--pink)"></div><div class="pg-feature-text"><h4>Young & Educated</h4><p>85% under 34. 72% hold college or grad degree. Near-equal male-female ratio (56/44).</p></div></div>
+        <div class="pg-feature"><div class="pg-feature-dot" style="background:#6BCB77"></div><div class="pg-feature-text"><h4>Top App Interests</h4><p>#1 Tools, #2 Shopping, #3 Games, #4 Video, #5 Productivity, #6 Social. High digital engagement.</p></div></div>
+      </div>
+    </div>
+
+    <div class="pg-section">
+      <div class="pg-section-title">Case Studies</div>
+      <div class="pg-cards">
+        <div class="pg-card"><div class="pg-card-icon" style="background:rgba(90,159,212,0.1)"><svg width="20" height="20" fill="none" stroke="#5A9FD4" stroke-width="1.8"><path d="M12 2v6l4-3-4-3z"/><rect x="3" y="4" width="8" height="12" rx="1.5"/></svg></div><h4>Fintech — 25K+ Installs</h4><p>12-week campaign. 5-6% loan application rate. 2x W-o-W growth. Appography targeting for BFSI audience.</p></div>
+        <div class="pg-card"><div class="pg-card-icon" style="background:rgba(230,138,154,0.1)"><svg width="20" height="20" fill="none" stroke="#E68A9A" stroke-width="1.8"><path d="M6 3l8 7-8 7V3z" fill="rgba(230,138,154,0.15)"/></svg></div><h4>Gaming — 800K+ Installs</h4><p>8-week campaign. 1.2% install-to-deposit rate. 2x W-o-W performance growth for RMG app.</p></div>
+        <div class="pg-card"><div class="pg-card-icon" style="background:rgba(221,167,74,0.1)"><svg width="20" height="20" fill="none" stroke="#DDA74A" stroke-width="1.8"><rect x="3" y="6" width="14" height="8" rx="2"/><circle cx="6" cy="13" r="1.5"/><circle cx="14" cy="13" r="1.5"/></svg></div><h4>Auto Branding — 25M+ Imp/Day</h4><p>8M+ clicks/day, 2.8-3.2% CTR. Multi-format campaign using appography, location & device targeting.</p></div>
+      </div>
+    </div>
+
+    <div class="pg-cta">
+      <h3>Advertise on 670M+ Xiaomi Devices</h3>
+      <p>System-level placements, AI optimization, and unmatched scale in India.</p>
+      <a class="pg-cta-btn" href="mailto:sales@bijam.in">Contact Sales</a>
+    </div>
+  </div>`;
 }
 
 function backToAllIndia() {
