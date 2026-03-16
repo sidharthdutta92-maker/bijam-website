@@ -1,0 +1,7 @@
+# Dev/preview files
+_server.js
+preview.html
+preview_lite.html
+color_preview.html
+.claude/
+node_modules/
