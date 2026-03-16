@@ -69,6 +69,30 @@ body{font-family:'Space Grotesk',system-ui,-apple-system,sans-serif;background:v
 @keyframes dropIn{from{opacity:0;transform:translateY(-16px) scale(0.9)}to{opacity:1;transform:translateY(0) scale(1)}}
 @keyframes barGrow{from{width:0}to{width:var(--bar-width)}}
 
+/* ===== 1. FULL-PAGE GRAIN OVERLAY ===== */
+body::before{content:'';position:fixed;inset:0;z-index:9998;pointer-events:none;background-image:url('Assets & Recommendations/04-Texture-Overlays/dither-fine-noise-square.svg');background-repeat:repeat;background-size:200px 200px;opacity:0.015;mix-blend-mode:overlay}
+
+/* ===== 2. WIREFRAME GLOBE BEHIND ABOUT HERO ===== */
+.about-hero .globe-watermark{position:absolute;top:50%;right:-20px;transform:translateY(-50%);width:180px;height:180px;opacity:0.06;pointer-events:none;z-index:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 19.63 15.39'%3E%3Cpath d='M9.81 0C4.39 0 0 3.44 0 7.7s4.39 7.69 9.81 7.69 9.82-3.44 9.82-7.69S15.24 0 9.81 0z' fill='%23DDA74A'/%3E%3C/svg%3E");background-repeat:no-repeat;background-size:contain;background-position:center}
+
+/* ===== 3. GOLD GLOW ORB (4-point star) ===== */
+.about-hero .glow-orb,.about-cta .glow-orb{position:absolute;pointer-events:none;z-index:0;width:300px;height:300px;opacity:0.18;filter:blur(40px);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 3700 3699.95'%3E%3Cpath d='m1145.21,1045.94l510.74-915.24c98.21-175.99,352.16-173.8,447.32,3.86l473.91,884.76c23.7,44.24,59.92,80.5,104.14,104.24l884.33,474.73c177.57,95.32,179.52,349.28,3.44,447.33l-915.71,509.89c-41.37,23.04-75.51,57.15-98.59,98.5l-510.74,915.24c-98.21,175.99-352.16,173.8-447.32-3.86l-473.91-884.76c-23.7-44.24-59.92-80.5-104.14-104.24l-884.33-474.73c-177.57-95.32-179.52-349.28-3.44-447.33l915.71-509.89c41.37-23.04,75.51-57.15,98.59-98.5Z' fill='%23DDA74A'/%3E%3C/svg%3E");background-repeat:no-repeat;background-size:contain}
+.about-hero .glow-orb{top:-100px;left:-80px}
+.about-cta .glow-orb{bottom:-120px;right:-100px;width:250px;height:250px;opacity:0.15}
+
+/* ===== 4. (removed — corner brackets too busy at small card sizes) ===== */
+
+/* ===== 5. TOPOGRAPHIC CONTOUR ON MAP ===== */
+.map-wrap::after{content:'';position:absolute;inset:0;z-index:400;pointer-events:none;background-image:url('Assets & Recommendations/05-Map-and-Globe-Elements/retro-topographic-contour.svg');background-repeat:no-repeat;background-size:cover;background-position:center;opacity:0.025;mix-blend-mode:overlay}
+
+/* ===== 6. (removed — star divider too heavy) ===== */
+
+/* ===== 8. (removed — concentric rings too noisy behind stat grid) ===== */
+
+/* ===== 7. FLAME MANDALA BEHIND CTA ===== */
+.about-cta{position:relative;overflow:hidden}
+.about-cta::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:200px;height:200px;pointer-events:none;z-index:0;opacity:0.07;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 3700 3699.95'%3E%3Cpath d='m1145.21,1045.94l510.74-915.24c98.21-175.99,352.16-173.8,447.32,3.86l473.91,884.76c23.7,44.24,59.92,80.5,104.14,104.24l884.33,474.73c177.57,95.32,179.52,349.28,3.44,447.33l-915.71,509.89c-41.37,23.04-75.51,57.15-98.59,98.5l-510.74,915.24c-98.21,175.99-352.16,173.8-447.32-3.86l-473.91-884.76c-23.7-44.24-59.92-80.5-104.14-104.24l-884.33-474.73c-177.57-95.32-179.52-349.28-3.44-447.33l915.71-509.89c41.37-23.04,75.51-57.15,98.59-98.5Z' fill='%23DDA74A'/%3E%3C/svg%3E");background-repeat:no-repeat;background-size:contain;background-position:center;filter:blur(8px)}
+
 /* ===== TOP BAR ===== */
 .topbar{background:var(--bg-raised);border-bottom:1px solid var(--border);padding:14px 28px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;z-index:1000;position:relative}
 .logo{display:flex;align-items:center;gap:12px;position:relative;z-index:1}
@@ -202,9 +226,9 @@ body{font-family:'Space Grotesk',system-ui,-apple-system,sans-serif;background:v
 .media-card p{font-size:9px;color:var(--muted);line-height:1.3}
 
 .about-cta{margin-top:8px;padding:22px;border-radius:var(--radius-lg);text-align:center;background:rgba(221,167,74,0.04);border:1px solid rgba(221,167,74,0.1);position:relative}
-.about-cta h4{font-size:14px;font-weight:700;color:var(--text-primary)}
-.about-cta p{font-size:12px;color:var(--muted);margin-top:5px}
-.about-cta-btn{margin-top:14px;padding:11px 28px;background:linear-gradient(135deg,var(--gold),var(--gold-light));color:#0B0F14;border:none;border-radius:var(--radius-full);font-size:13px;font-weight:700;cursor:pointer;font-family:'Space Grotesk',sans-serif;transition:all var(--transition-base);box-shadow:0 2px 15px rgba(221,167,74,0.25);position:relative;overflow:hidden}
+.about-cta h4{font-size:14px;font-weight:700;color:var(--text-primary);position:relative;z-index:1}
+.about-cta p{font-size:12px;color:var(--muted);margin-top:5px;position:relative;z-index:1}
+.about-cta-btn{position:relative;z-index:1;margin-top:14px;padding:11px 28px;background:linear-gradient(135deg,var(--gold),var(--gold-light));color:#0B0F14;border:none;border-radius:var(--radius-full);font-size:13px;font-weight:700;cursor:pointer;font-family:'Space Grotesk',sans-serif;transition:all var(--transition-base);box-shadow:0 2px 15px rgba(221,167,74,0.25);overflow:hidden}
 .about-cta-btn::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.2),transparent);background-size:200% 100%;animation:shimmer 3s linear infinite}
 .about-cta-btn:hover{transform:translateY(-1px);box-shadow:0 4px 25px rgba(221,167,74,0.35)}
 
@@ -265,7 +289,7 @@ body{font-family:'Space Grotesk',system-ui,-apple-system,sans-serif;background:v
 .detail-about{margin-top:28px;padding:22px;background:var(--bg-surface);border-radius:var(--radius-lg);border:1px solid var(--border)}
 .detail-about h3{font-size:11px;font-weight:700;color:var(--muted);margin-bottom:12px;letter-spacing:0.06em;text-transform:uppercase}
 .detail-about p{font-size:14px;color:var(--text-secondary);line-height:1.7}
-.specs-card{background:var(--bg-surface);border-radius:var(--radius-lg);border:1px solid var(--border);padding:22px;align-self:flex-start;position:sticky;top:80px;transition:box-shadow var(--transition-base)}
+.specs-card{background:var(--bg-surface);border-radius:var(--radius-lg);border:1px solid var(--border);padding:22px;align-self:flex-start;position:sticky;top:80px;transition:box-shadow var(--transition-base);overflow:hidden}
 .specs-card:hover{box-shadow:var(--shadow-glow-gold)}
 .specs-card h3{font-size:11px;font-weight:700;color:var(--muted);margin-bottom:16px;letter-spacing:0.06em;text-transform:uppercase}
 .spec-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--border);transition:background var(--transition-fast)}
@@ -419,6 +443,8 @@ body{font-family:'Space Grotesk',system-ui,-apple-system,sans-serif;background:v
   <div class="right-panel">
     <div class="about-panel" id="about-panel">
       <div class="about-hero">
+        <div class="globe-watermark"></div>
+        <div class="glow-orb"></div>
         <p style="margin-top:0">Premium outdoor advertising across India. Connecting brands with audiences through strategic hoarding and digital media placements.</p>
       </div>
       <div class="about-body">
@@ -433,6 +459,7 @@ body{font-family:'Space Grotesk',system-ui,-apple-system,sans-serif;background:v
         <div class="about-section">
           <h3>Get Started</h3>
           <div class="about-cta">
+            <div class="glow-orb"></div>
             <h4>Explore Our Inventory</h4>
             <p>Click a state on the map or bar above to browse available media sites.</p>
             <button class="about-cta-btn" onclick="window.open('mailto:info@bijam.com?subject=Bijam OOH Inquiry')">Contact Sales</button>
@@ -631,17 +658,33 @@ function buildMediaGrid() {
   document.getElementById('media-grid').innerHTML = `
     <div class="media-card" id="media-card-billboards" onclick="selectMediaType('billboards')">
       <div class="media-card-icon" style="background:rgba(221,167,74,0.1)">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#DDA74A" stroke-width="2" stroke-linecap="round">
-          <rect x="3" y="3" width="18" height="14" rx="2"/><path d="M3 17h18M8 21h8M12 17v4"/>
+        <svg viewBox="0 0 24 24" fill="none" stroke="#DDA74A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="2" width="20" height="12" rx="1.5"/>
+          <rect x="5" y="4.5" width="6" height="7" rx="0.5" fill="rgba(221,167,74,0.12)" stroke="none"/>
+          <line x1="5" y1="4.5" x2="11" y2="11.5" stroke-width="1.2"/>
+          <line x1="13.5" y1="5.5" x2="19" y2="5.5" stroke-width="1.2"/>
+          <line x1="13.5" y1="8" x2="19" y2="8" stroke-width="1.2"/>
+          <line x1="13.5" y1="10.5" x2="17" y2="10.5" stroke-width="1.2"/>
+          <line x1="9" y1="14" x2="9" y2="20.5"/>
+          <line x1="15" y1="14" x2="15" y2="20.5"/>
+          <line x1="6" y1="20.5" x2="18" y2="20.5" stroke-width="2"/>
+          <line x1="9" y1="17" x2="15" y2="17" stroke-width="1.2"/>
         </svg>
       </div>
       <h4>Billboards</h4>
       <p>${tradCount} sites</p>
     </div>
     <div class="media-card" id="media-card-digital" onclick="selectMediaType('digital')">
-      <div class="media-card-icon" style="background:rgba(59,107,146,0.1)">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#3B6B92" stroke-width="2" stroke-linecap="round">
-          <rect x="2" y="4" width="20" height="12" rx="2"/><path d="M12 16v4M8 20h8"/><circle cx="12" cy="10" r="2"/>
+      <div class="media-card-icon" style="background:rgba(90,159,212,0.1)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#5A9FD4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="3" width="20" height="14" rx="2"/>
+          <circle cx="7" cy="8" r="1.1" fill="#5A9FD4" stroke="none"/>
+          <circle cx="12" cy="8" r="1.1" fill="#5A9FD4" stroke="none"/>
+          <circle cx="17" cy="8" r="1.1" fill="#5A9FD4" stroke="none"/>
+          <circle cx="7" cy="13" r="1.1" fill="rgba(90,159,212,0.35)" stroke="none"/>
+          <circle cx="12" cy="13" r="1.1" fill="#5A9FD4" stroke="none"/>
+          <circle cx="17" cy="13" r="1.1" fill="rgba(90,159,212,0.35)" stroke="none"/>
+          <path d="M12 17v3M8 20h8"/>
         </svg>
       </div>
       <h4>Digital LED</h4>
@@ -649,8 +692,13 @@ function buildMediaGrid() {
     </div>
     <div class="media-card" id="media-card-transit" onclick="selectMediaType('transit')">
       <div class="media-card-icon" style="background:rgba(230,138,154,0.1)">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#E68A9A" stroke-width="2" stroke-linecap="round">
-          <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/>
+        <svg viewBox="0 0 24 24" fill="none" stroke="#E68A9A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="5" y="2" width="14" height="16" rx="3"/>
+          <rect x="7.5" y="5" width="9" height="5.5" rx="1" fill="rgba(230,138,154,0.12)"/>
+          <circle cx="8.5" cy="14.5" r="1.2" fill="#E68A9A" stroke="none"/>
+          <circle cx="15.5" cy="14.5" r="1.2" fill="#E68A9A" stroke="none"/>
+          <line x1="12" y1="5" x2="12" y2="10.5" stroke="rgba(230,138,154,0.3)" stroke-width="0.8"/>
+          <path d="M8 18l-2.5 4M16 18l2.5 4M6 22h12"/>
         </svg>
       </div>
       <h4>Transit</h4>
