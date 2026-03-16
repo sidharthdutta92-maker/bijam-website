@@ -446,8 +446,8 @@ body::before{content:'';position:fixed;inset:0;z-index:9998;pointer-events:none;
   .nav-desktop-only{display:none!important}
   .nav-mobile-more{display:block!important}
   .topbar-stats{display:none}
-  .topbar-nav{gap:2px}
-  .topbar-nav a,.nav-dropdown-trigger{padding:6px 10px;font-size:11px}
+  .topbar-nav{gap:4px}
+  .topbar-nav a,.nav-dropdown-trigger{padding:5px 8px;font-size:11px;white-space:nowrap}
 
   .city-bar{padding:0 12px}
   .city-bar-inner{gap:2px;padding:8px 0}
@@ -532,9 +532,9 @@ body::before{content:'';position:fixed;inset:0;z-index:9998;pointer-events:none;
     <span class="logo-tagline">Absolute Presence</span>
   </div>
   <nav class="topbar-nav">
-    <a href="#" class="active" onclick="navigateTo('inventory');return false">Inventory</a>
+    <a href="#" class="active" onclick="navigateTo('inventory');return false">OOH</a>
     <div class="nav-dropdown" id="nav-products">
-      <button class="nav-dropdown-trigger" onclick="toggleNavDropdown('nav-products',event)">Products <svg viewBox="0 0 12 12"><polyline points="2,4 6,8 10,4"/></svg></button>
+      <button class="nav-dropdown-trigger" onclick="toggleNavDropdown('nav-products',event)">Digital Media <svg viewBox="0 0 12 12"><polyline points="2,4 6,8 10,4"/></svg></button>
       <div class="nav-dropdown-menu">
         <a href="#" onclick="navigateTo('truecaller');document.getElementById('nav-products').classList.remove('open');return false">Truecaller Ads</a>
         <a href="#" onclick="navigateTo('chalo');document.getElementById('nav-products').classList.remove('open');return false">Chalo Bus Ads</a>
