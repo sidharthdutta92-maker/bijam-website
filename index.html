@@ -218,14 +218,16 @@ body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--pea
 .inv-list{flex:1;overflow-y:auto;padding:10px 12px;display:flex;flex-direction:column;gap:6px;background:var(--pearl-50)}
 
 /* ===== INVENTORY ITEMS ===== */
-.site-item{padding:12px;border-radius:var(--radius-lg);background:var(--card);border:1px solid rgba(26,51,79,0.06);cursor:pointer;transition:all var(--transition-base);box-shadow:var(--shadow-xs);position:relative;overflow:hidden}
+.site-item{padding:0;border-radius:var(--radius-lg);background:var(--card);border:1px solid rgba(26,51,79,0.06);cursor:pointer;transition:all var(--transition-base);box-shadow:var(--shadow-xs);position:relative;overflow:hidden;display:flex;gap:0;min-height:80px}
 .site-item:hover,.site-item.hovered{border-color:var(--gold);box-shadow:var(--shadow-md),0 0 0 3px rgba(221,167,74,0.08);transform:translateY(-1px)}
-.site-item-photo{width:100%;height:0;overflow:hidden;border-radius:var(--radius-md);margin-bottom:0;transition:height var(--transition-slow),margin var(--transition-slow)}
-.site-item:hover .site-item-photo,.site-item.hovered .site-item-photo{height:130px;margin-bottom:10px}
-.site-item-photo img{width:100%;height:130px;object-fit:cover;border-radius:var(--radius-md)}
-.site-item-photo .no-photo-sm{width:100%;height:130px;background:linear-gradient(135deg,#E8E4DC,var(--pearl));display:flex;align-items:center;justify-content:center;border-radius:var(--radius-md);color:rgba(26,51,79,0.12);font-size:10px}
-.site-item-loc{font-size:13px;font-weight:600;color:var(--indigo);line-height:1.35}
-.site-item-id{font-size:9px;color:var(--muted-foreground);margin-top:5px;font-weight:500}
+.site-item-photo{width:80px;min-height:80px;flex-shrink:0;overflow:hidden;position:relative;background:linear-gradient(135deg,#E8E4DC,var(--pearl))}
+.site-item-photo img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
+.site-item-photo .no-photo-sm{width:100%;height:100%;position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:rgba(26,51,79,0.12);font-size:9px}
+.site-item-body{flex:1;padding:10px 12px;display:flex;flex-direction:column;gap:4px;min-width:0}
+.site-item-loc{font-size:12px;font-weight:600;color:var(--indigo);line-height:1.35;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.site-item-id{font-size:9px;color:var(--muted-foreground);font-weight:500}
+.city-card{padding:14px 16px;border-radius:var(--radius-lg);background:var(--card);border:1px solid rgba(26,51,79,0.06);cursor:pointer;transition:all var(--transition-base);box-shadow:var(--shadow-xs)}
+.city-card:hover{border-color:var(--gold);box-shadow:var(--shadow-md),0 0 0 3px rgba(221,167,74,0.08);transform:translateY(-1px)}
 
 /* ===== TAGS ===== */
 .tag{padding:3px 9px;border-radius:var(--radius-full);font-size:10px;font-weight:600;letter-spacing:0.02em;text-transform:uppercase;white-space:nowrap;display:inline-block;transition:all var(--transition-fast)}
@@ -877,10 +879,10 @@ function buildStateCityList(state) {
     const tradCount = data.entries.filter(e => e.mediaCategory === 'Traditional OOH').length;
     const digiCount = data.entries.filter(e => e.mediaCategory === 'Digital').length;
     html += `
-    <div class="site-item" onclick="selectCity('${city.replace(/'/g, "\\'")}')" style="cursor:pointer">
+    <div class="city-card" onclick="selectCity('${city.replace(/'/g, "\\'")}')" style="cursor:pointer">
       <div style="display:flex;justify-content:space-between;align-items:center">
         <div>
-          <div class="site-item-loc" style="font-size:15px;font-weight:800">${city}</div>
+          <div style="font-size:14px;font-weight:800;color:var(--indigo)">${city}</div>
           <div style="margin-top:6px;display:flex;gap:5px">
             ${tradCount > 0 ? `<span class="tag tag-xs tag-traditional">${tradCount} OOH</span>` : ''}
             ${digiCount > 0 ? `<span class="tag tag-xs tag-digital">${digiCount} Digital</span>` : ''}
@@ -1002,17 +1004,19 @@ function buildInventoryList(entries) {
       onmouseenter="hoverItem('${e.id}')" onmouseleave="unhoverItem('${e.id}')"
       onclick="openDetail('${e.id}')">
       <div class="site-item-photo">${photoHTML}</div>
-      <div class="popup-tags">
-        <span class="tag tag-xs ${tagVariant}">${e.mediaCategory}</span>
-        <span class="tag tag-xs tag-default">${e.mediaType}</span>
+      <div class="site-item-body">
+        <div class="popup-tags">
+          <span class="tag tag-xs ${tagVariant}">${e.mediaCategory}</span>
+          <span class="tag tag-xs tag-default">${e.mediaType}</span>
+        </div>
+        <div class="site-item-loc">${e.location}</div>
+        <div class="popup-specs" style="margin-top:2px">
+          <span class="tag tag-default">${e.size}</span>
+          ${e.areaSqFt > 0 ? `<span class="tag tag-default">${e.areaSqFt} sq ft</span>` : ''}
+          <span class="tag tag-default">${e.lighting}</span>
+        </div>
+        <div class="site-item-id">${e.id}</div>
       </div>
-      <div class="site-item-loc">${e.location}</div>
-      <div class="popup-specs" style="margin-top:6px">
-        <span class="tag tag-default">${e.size}</span>
-        ${e.areaSqFt > 0 ? `<span class="tag tag-default">${e.areaSqFt} sq ft</span>` : ''}
-        <span class="tag tag-default">${e.lighting}</span>
-      </div>
-      <div class="site-item-id">${e.id}</div>
     </div>`;
   });
   list.innerHTML = html;
