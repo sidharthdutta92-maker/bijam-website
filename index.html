@@ -117,6 +117,8 @@ body::before{content:'';position:fixed;inset:0;z-index:9998;pointer-events:none;
 .nav-dropdown.open .nav-dropdown-menu{opacity:1;visibility:visible;transform:translateY(0)}
 .nav-dropdown-menu a{display:block;padding:8px 14px;font-size:12px;font-weight:500;color:var(--text-secondary);text-decoration:none;border-radius:var(--radius-sm);transition:all var(--transition-fast)}
 .nav-dropdown-menu a:hover{background:rgba(255,255,255,0.06);color:var(--text-primary)}
+.nav-mobile-more{display:none}
+.nav-mobile-more .nav-dropdown-menu{left:auto;right:0}
 .topbar-stats{font-size:12px;color:rgba(255,255,255,0.35);font-weight:500;position:relative;z-index:1}
 .topbar-stats span{color:rgba(255,255,255,0.7);font-weight:700}
 
@@ -437,9 +439,15 @@ body::before{content:'';position:fixed;inset:0;z-index:9998;pointer-events:none;
 @media (max-width: 640px) {
   body{overflow:auto;height:auto}
   .topbar{padding:10px 16px}
+  .logo{gap:8px}
   .logo-name{font-size:16px}
-  .logo-badge{font-size:8px;padding:2px 7px}
-  .topbar-stats{font-size:10px}
+  .logo-badge{font-size:7px;padding:2px 6px;white-space:nowrap}
+  .logo-tagline{font-size:6.5px;bottom:-7px;left:42px;letter-spacing:0.18em}
+  .nav-desktop-only{display:none!important}
+  .nav-mobile-more{display:block!important}
+  .topbar-stats{display:none}
+  .topbar-nav{gap:2px}
+  .topbar-nav a,.nav-dropdown-trigger{padding:6px 10px;font-size:11px}
 
   .city-bar{padding:0 12px}
   .city-bar-inner{gap:2px;padding:8px 0}
@@ -484,9 +492,12 @@ body::before{content:'';position:fixed;inset:0;z-index:9998;pointer-events:none;
 
 @media (max-width: 480px) {
   .topbar{padding:8px 12px}
+  .logo{gap:6px}
   .logo-icon{width:30px;height:30px}
   .logo-icon svg{width:14px;height:14px}
-  .logo-name{font-size:14px}
+  .logo-name{font-size:14px;letter-spacing:0.08em}
+  .logo-badge{font-size:6.5px;padding:2px 5px}
+  .logo-tagline{font-size:6px;bottom:-6px;left:36px;letter-spacing:0.15em}
   .topbar-stats{font-size:9px}
 
   .map-wrap{height:38vh;min-height:240px}
@@ -514,7 +525,7 @@ body::before{content:'';position:fixed;inset:0;z-index:9998;pointer-events:none;
 
 <!-- TOP BAR -->
 <div class="topbar">
-  <div class="logo">
+  <div class="logo" onclick="navigateTo('inventory')" style="cursor:pointer">
     <div class="logo-icon"><svg viewBox="0 0 24 24"><path d="M12 2v20M2 12h20M7 7l10 10M17 7L7 17"/></svg></div>
     <span class="logo-name">Bijam</span>
     <span class="logo-badge">Media Spaces</span>
@@ -523,7 +534,7 @@ body::before{content:'';position:fixed;inset:0;z-index:9998;pointer-events:none;
   <nav class="topbar-nav">
     <a href="#" class="active" onclick="navigateTo('inventory');return false">Inventory</a>
     <div class="nav-dropdown" id="nav-products">
-      <button class="nav-dropdown-trigger" onclick="toggleNavDropdown('nav-products')">Products <svg viewBox="0 0 12 12"><polyline points="2,4 6,8 10,4"/></svg></button>
+      <button class="nav-dropdown-trigger" onclick="toggleNavDropdown('nav-products',event)">Products <svg viewBox="0 0 12 12"><polyline points="2,4 6,8 10,4"/></svg></button>
       <div class="nav-dropdown-menu">
         <a href="#" onclick="navigateTo('truecaller');document.getElementById('nav-products').classList.remove('open');return false">Truecaller Ads</a>
         <a href="#" onclick="navigateTo('chalo');document.getElementById('nav-products').classList.remove('open');return false">Chalo Bus Ads</a>
@@ -531,8 +542,15 @@ body::before{content:'';position:fixed;inset:0;z-index:9998;pointer-events:none;
         <a href="#" onclick="navigateTo('xiaomi');document.getElementById('nav-products').classList.remove('open');return false">Xiaomi Ads</a>
       </div>
     </div>
-    <a href="#" onclick="navigateTo('careers');return false">Careers</a>
-    <a href="#" onclick="navigateTo('about-us');return false">About Us</a>
+    <a href="#" class="nav-desktop-only" onclick="navigateTo('careers');return false">Careers</a>
+    <a href="#" class="nav-desktop-only" onclick="navigateTo('about-us');return false">About Us</a>
+    <div class="nav-dropdown nav-mobile-more" id="nav-more">
+      <button class="nav-dropdown-trigger" onclick="toggleNavDropdown('nav-more',event)">More <svg viewBox="0 0 12 12"><polyline points="2,4 6,8 10,4"/></svg></button>
+      <div class="nav-dropdown-menu">
+        <a href="#" onclick="navigateTo('careers');document.getElementById('nav-more').classList.remove('open');return false">Careers</a>
+        <a href="#" onclick="navigateTo('about-us');document.getElementById('nav-more').classList.remove('open');return false">About Us</a>
+      </div>
+    </div>
   </nav>
   <div class="topbar-stats" id="topbar-stats"></div>
 </div>
@@ -1329,8 +1347,11 @@ function closeStatesDropdown() {
 }
 
 // ===== NAV DROPDOWN =====
-function toggleNavDropdown(id) {
+function toggleNavDropdown(id, evt) {
+  if (evt) evt.stopPropagation();
   const dd = document.getElementById(id);
+  // Close other nav dropdowns
+  document.querySelectorAll('.nav-dropdown.open').forEach(d => { if (d.id !== id) d.classList.remove('open'); });
   dd.classList.toggle('open');
 }
 
@@ -1342,6 +1363,9 @@ document.addEventListener('click', function(e) {
   // Nav products dropdown
   const nd = document.getElementById('nav-products');
   if (nd && !nd.contains(e.target)) nd.classList.remove('open');
+  // Nav more dropdown
+  const nm = document.getElementById('nav-more');
+  if (nm && !nm.contains(e.target)) nm.classList.remove('open');
 });
 
 // ===== PAGE NAVIGATION =====
