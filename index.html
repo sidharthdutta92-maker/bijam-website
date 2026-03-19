@@ -154,6 +154,7 @@ body::before{content:'';position:fixed;inset:0;z-index:9998;pointer-events:none;
 
 /* ===== PAGE CONTAINER (product & info pages) ===== */
 #page-container{flex:1;background:var(--bg);overflow-y:auto;display:none}
+@media(max-width:640px){#page-container{max-height:calc(100vh - 68px);max-height:calc(100dvh - 68px);overflow-y:auto}}
 .pg{max-width:960px;margin:0 auto;padding:48px 32px 64px;animation:fadeInUp 0.4s ease}
 .pg-hero{text-align:center;margin-bottom:48px}
 .pg-badge{display:inline-flex;align-items:center;gap:6px;font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:5px 14px;border-radius:var(--radius-full);margin-bottom:16px}
@@ -219,7 +220,21 @@ body::before{content:'';position:fixed;inset:0;z-index:9998;pointer-events:none;
 .pg-phone img{width:100%;display:block}
 .pg-tv{border-radius:var(--radius-md);overflow:hidden;border:1px solid var(--border);box-shadow:var(--shadow-lg);margin-top:12px}
 .pg-tv img{width:100%;display:block}
-@media(max-width:640px){.pg-features{grid-template-columns:1fr}.pg-cards{grid-template-columns:1fr}.pg-stats{gap:8px}.pg-stat{min-width:80px;padding:12px 16px}.pg-showcase{grid-template-columns:1fr}.pg-phones{gap:10px}.pg-phone{width:110px}}
+/* Contact cards */
+.contact-card{display:flex;align-items:center;gap:12px;padding:16px 20px;border-radius:var(--radius-md);background:var(--card);border:1px solid var(--border);text-decoration:none;transition:all var(--transition-base);flex:1;min-width:200px}
+.contact-card:hover{background:var(--card-hover);border-color:var(--border-strong);transform:translateY(-1px)}
+/* Contact form */
+.contact-form{display:flex;flex-direction:column;gap:16px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.form-group{display:flex;flex-direction:column;gap:5px}
+.form-label{font-size:11px;font-weight:600;color:var(--text-secondary);text-transform:uppercase;letter-spacing:0.06em}
+.form-input{padding:10px 14px;border-radius:var(--radius-md);border:1px solid var(--border);background:rgba(255,255,255,0.03);color:var(--text-primary);font-size:13px;font-family:'Space Grotesk',sans-serif;transition:all var(--transition-fast);outline:none}
+.form-input:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(221,167,74,0.12);background:rgba(255,255,255,0.05)}
+.form-input::placeholder{color:var(--muted-foreground)}
+.form-textarea{resize:vertical;min-height:80px}
+select.form-input{appearance:none;background-image:url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L5 5L9 1' stroke='%23888' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:32px}
+select.form-input option{background:var(--bg-raised);color:var(--text-primary)}
+@media(max-width:640px){.pg-features{grid-template-columns:1fr}.pg-cards{grid-template-columns:1fr}.pg-stats{gap:8px}.pg-stat{min-width:80px;padding:12px 16px}.pg-showcase{grid-template-columns:1fr}.pg-phones{gap:10px}.pg-phone{width:110px}.form-row{grid-template-columns:1fr}.contact-card{min-width:auto}}
 
 /* ===== SEARCH BAR ===== */
 .search-wrap{position:relative;flex-shrink:0;margin-right:8px;z-index:9999}
@@ -1391,16 +1406,192 @@ function navigateTo(page) {
   const builders = { truecaller: buildTruecallerPage, chalo: buildChaloPage, patchwall: buildPatchwallPage, xiaomi: buildXiaomiPage };
   if (builders[page]) { container.innerHTML = builders[page](); return; }
 
-  // Careers / About Us placeholder
+  if (page === 'about-us') { container.innerHTML = buildAboutUsPage(); return; }
+
+  // Careers placeholder
   const placeholders = {
-    'careers': { icon: '\u{1F4BC}', title: 'Careers', desc: 'Join the Bijam team and help shape the future of outdoor advertising in India.' },
-    'about-us': { icon: '\u{1F3E2}', title: 'About Us', desc: 'Bijam is a leading media spaces company connecting brands with audiences through strategic outdoor and digital placements across India.' }
+    'careers': { icon: '\u{1F4BC}', title: 'Careers', desc: 'Join the Bijam team and help shape the future of outdoor advertising in India.' }
   };
   const p = placeholders[page] || { icon: '\u{1F4CB}', title: page, desc: '' };
   container.innerHTML = `<div class="pg-placeholder"><div class="pg-placeholder-icon">${p.icon}</div><h1 class="pg-placeholder-title">${p.title}</h1><p class="pg-placeholder-desc">${p.desc}</p><div class="pg-placeholder-badge">Coming Soon</div></div>`;
 }
 
 // ===== TRUECALLER ADS PAGE =====
+// ===== ABOUT US PAGE =====
+function buildAboutUsPage() {
+  return `<div class="pg">
+    <button class="pg-back" onclick="navigateTo('inventory')"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 2L4 7l5 5"/></svg> Back to Inventory</button>
+    <div class="pg-hero">
+      <span class="pg-badge" style="background:rgba(221,167,74,0.12);color:var(--gold);border-color:rgba(221,167,74,0.25)">About</span>
+      <h1 class="pg-title">About Bijam</h1>
+      <p class="pg-subtitle">Bijam is a leading media spaces company connecting brands with audiences through strategic outdoor and digital media placements across India. We bridge the gap between traditional OOH advertising and modern digital campaigns.</p>
+    </div>
+
+    <div class="pg-section">
+      <div class="pg-section-title">What We Do</div>
+      <div class="pg-features">
+        <div class="pg-feature"><div class="pg-feature-dot" style="background:var(--gold)"></div><div class="pg-feature-text"><h4>OOH Advertising</h4><p>5,000+ billboard, hoarding, and transit media sites across 59 cities and 9 states in India.</p></div></div>
+        <div class="pg-feature"><div class="pg-feature-dot" style="background:var(--blue)"></div><div class="pg-feature-text"><h4>Digital Media</h4><p>Strategic partnerships with Truecaller, Xiaomi, PatchWall, and Chalo for targeted digital campaigns.</p></div></div>
+        <div class="pg-feature"><div class="pg-feature-dot" style="background:var(--pink)"></div><div class="pg-feature-text"><h4>End-to-End Solutions</h4><p>From planning and booking to creative execution and campaign reporting — we handle it all.</p></div></div>
+        <div class="pg-feature"><div class="pg-feature-dot" style="background:#6BCB77"></div><div class="pg-feature-text"><h4>Pan-India Reach</h4><p>Deep presence in Tier 1, 2, and 3 cities. Hyperlocal targeting combined with national scale.</p></div></div>
+      </div>
+    </div>
+
+    <div class="pg-section">
+      <div class="pg-section-title">Contact Us</div>
+      <div style="display:flex;flex-wrap:wrap;gap:16px;margin-bottom:24px">
+        <a href="tel:+917718827729" class="contact-card">
+          <svg width="20" height="20" fill="none" stroke="var(--gold)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+          <div>
+            <div style="font-size:11px;color:var(--muted);margin-bottom:2px">Phone</div>
+            <div style="font-size:14px;font-weight:600;color:var(--text-primary)">+91 77188 27729</div>
+          </div>
+        </a>
+        <a href="mailto:bijammedia@gmail.com" class="contact-card">
+          <svg width="20" height="20" fill="none" stroke="var(--blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="16" height="12" rx="2"/><polyline points="2,4 10,11 18,4"/></svg>
+          <div>
+            <div style="font-size:11px;color:var(--muted);margin-bottom:2px">Email</div>
+            <div style="font-size:14px;font-weight:600;color:var(--text-primary)">bijammedia@gmail.com</div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <div class="pg-section">
+      <div class="pg-section-title">Get in Touch</div>
+      <p style="font-size:13px;color:var(--text-secondary);margin-bottom:20px">Interested in advertising with us? Fill out the form below and our team will get back to you within 24 hours.</p>
+      <form class="contact-form" id="contact-form" onsubmit="handleContactForm(event)">
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Full Name *</label>
+            <input type="text" name="name" class="form-input" placeholder="Your name" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Company / Brand</label>
+            <input type="text" name="company" class="form-input" placeholder="Company name">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Email *</label>
+            <input type="email" name="email" class="form-input" placeholder="you@company.com" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Phone *</label>
+            <input type="tel" name="phone" class="form-input" placeholder="+91 XXXXX XXXXX" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Interested In</label>
+          <select name="interest" class="form-input">
+            <option value="">Select a service</option>
+            <option value="ooh">OOH Advertising (Billboards, Hoardings)</option>
+            <option value="digital-led">Digital LED Screens</option>
+            <option value="transit">Transit Media (Railway Stations)</option>
+            <option value="truecaller">Truecaller Ads</option>
+            <option value="chalo">Chalo Bus Ads</option>
+            <option value="patchwall">PatchWall TV Ads</option>
+            <option value="xiaomi">Xiaomi Mobile Ads</option>
+            <option value="multiple">Multiple Services</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Budget Range</label>
+            <select name="budget" class="form-input">
+              <option value="">Select budget range</option>
+              <option value="under-1l">Under \u20B91 Lakh</option>
+              <option value="1l-5l">\u20B91 - 5 Lakhs</option>
+              <option value="5l-15l">\u20B95 - 15 Lakhs</option>
+              <option value="15l-50l">\u20B915 - 50 Lakhs</option>
+              <option value="50l+">Above \u20B950 Lakhs</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Target Cities</label>
+            <input type="text" name="cities" class="form-input" placeholder="e.g. Lucknow, Patna, Delhi">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Message</label>
+          <textarea name="message" class="form-input form-textarea" rows="4" placeholder="Tell us about your campaign goals, timeline, or any specific requirements..."></textarea>
+        </div>
+        <button type="submit" class="pg-cta-btn" id="contact-submit-btn" style="margin-top:8px">Send Enquiry</button>
+        <div id="contact-form-status" style="margin-top:12px;font-size:13px;display:none"></div>
+      </form>
+    </div>
+  </div>`;
+}
+
+function handleContactForm(e) {
+  e.preventDefault();
+  const form = e.target;
+  const btn = document.getElementById('contact-submit-btn');
+  const status = document.getElementById('contact-form-status');
+  const data = new FormData(form);
+
+  // Build mailto fallback with form data
+  const name = data.get('name') || '';
+  const company = data.get('company') || '';
+  const email = data.get('email') || '';
+  const phone = data.get('phone') || '';
+  const interest = data.get('interest') || '';
+  const budget = data.get('budget') || '';
+  const cities = data.get('cities') || '';
+  const message = data.get('message') || '';
+
+  const subject = encodeURIComponent('New Enquiry from ' + name + (company ? ' (' + company + ')' : ''));
+  const body = encodeURIComponent(
+    'Name: ' + name +
+    '\nCompany: ' + company +
+    '\nEmail: ' + email +
+    '\nPhone: ' + phone +
+    '\nInterested In: ' + interest +
+    '\nBudget: ' + budget +
+    '\nTarget Cities: ' + cities +
+    '\n\nMessage:\n' + message
+  );
+
+  // Try Web3Forms if access key is set, otherwise use mailto
+  const WEB3FORMS_KEY = '0b3c4082-6701-46a1-a6e3-282758dde541';
+
+  if (WEB3FORMS_KEY) {
+    btn.textContent = 'Sending...';
+    btn.disabled = true;
+    fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        access_key: WEB3FORMS_KEY,
+        name, company, email, phone, interest, budget, cities, message,
+        subject: 'New Bijam Enquiry from ' + name
+      })
+    }).then(r => r.json()).then(res => {
+      if (res.success) {
+        status.style.display = 'block';
+        status.style.color = '#6BCB77';
+        status.textContent = 'Thank you! We will get back to you within 24 hours.';
+        form.reset();
+      } else {
+        throw new Error('Failed');
+      }
+    }).catch(() => {
+      status.style.display = 'block';
+      status.style.color = 'var(--pink)';
+      status.textContent = 'Something went wrong. Please try calling us or use email.';
+    }).finally(() => {
+      btn.textContent = 'Send Enquiry';
+      btn.disabled = false;
+    });
+  } else {
+    // Mailto fallback
+    window.location.href = 'mailto:bijammedia@gmail.com?subject=' + subject + '&body=' + body;
+    status.style.display = 'block';
+    status.style.color = '#6BCB77';
+    status.textContent = 'Opening your email client... If it does not open, please email us directly at bijammedia@gmail.com';
+  }
+}
+
 function buildTruecallerPage() {
   return `<div class="pg">
     <button class="pg-back" onclick="navigateTo('inventory')"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 2L4 7l5 5"/></svg> Back to Inventory</button>
